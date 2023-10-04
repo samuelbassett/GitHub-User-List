@@ -1,6 +1,7 @@
 package com.tc.github_user_list.di
 
 import com.google.gson.Gson
+import com.tc.github_user_list.BuildConfig
 import com.tc.github_user_list.data.remote.ApiDetails
 import com.tc.github_user_list.data.remote.ApiEndpoint
 import com.tc.github_user_list.data.repository.Repository
@@ -25,8 +26,18 @@ class AppModule {
     @Provides
     fun provideHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor()
-                .setLevel(HttpLoggingInterceptor.Level.BODY))
+            .addInterceptor(
+                HttpLoggingInterceptor()
+                    .setLevel(HttpLoggingInterceptor.Level.BODY)
+            )
+            .addInterceptor {
+                val request =
+                    it.request()
+                        .newBuilder()
+                        .addHeader("Authorization", BuildConfig.API_KEY)
+                        .build()
+                it.proceed(request)
+            }
             .build()
     }
 
@@ -46,7 +57,7 @@ class AppModule {
     fun provideApiClient(
         retrofit: Retrofit
     ): ApiEndpoint {
-        return retrofit.create(ApiEndpoint::class.java )
+        return retrofit.create(ApiEndpoint::class.java)
     }
 
     @Provides

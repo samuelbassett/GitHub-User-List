@@ -3,6 +3,7 @@ package com.tc.github_user_list.data.repository
 import com.tc.github_user_list.data.model.followers.FollowersItemModel
 import com.tc.github_user_list.data.model.following.FollowingItemModel
 import com.tc.github_user_list.data.model.search.SearchItemModel
+import com.tc.github_user_list.data.model.search.SearchModel
 import com.tc.github_user_list.data.model.user.UserItemModel
 import com.tc.github_user_list.data.remote.ApiEndpoint
 import retrofit2.Call
@@ -17,7 +18,7 @@ class RepositoryImpl @Inject constructor(
         return service.getUsers()
     }
 
-    override suspend fun setSearch(q: String): Call<ArrayList<SearchItemModel>> {
+    override suspend fun setSearch(q: String): Response<SearchModel> {
         return service.setSearch(q)
     }
 

@@ -9,10 +9,9 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.tc.github_user_list.R
 import com.tc.github_user_list.data.model.search.SearchItemModel
 import com.tc.github_user_list.databinding.ItemSearchBinding
-import java.util.ArrayList
 
 class SearchAdapter(
-    private val data: ArrayList<SearchItemModel>,
+    private val data: List<SearchItemModel?>?,
     private val function: (item: SearchItemModel) -> Unit,
 ) : RecyclerView.Adapter<SearchAdapter.CustomViewHolder>() {
 
@@ -37,14 +36,18 @@ class SearchAdapter(
 
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        val senderData = data[position]
-        holder.setupUI(senderData, position)
+        val senderData = data?.get(position)
+        if (senderData != null) {
+            holder.setupUI(senderData, position)
+        }
 
         holder.itemView.setOnClickListener {
-            function.invoke(senderData)
+            if (senderData != null) {
+                function.invoke(senderData)
+            }
         }
     }
 
-    override fun getItemCount() = data.size
+    override fun getItemCount() = data?.size ?: 0
 
 }

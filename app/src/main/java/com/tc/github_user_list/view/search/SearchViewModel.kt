@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tc.github_user_list.data.model.search.SearchItemModel
+import com.tc.github_user_list.data.model.search.SearchModel
 import com.tc.github_user_list.data.model.user.UserItemModel
 import com.tc.github_user_list.data.repository.Repository
 import com.tc.github_user_list.util.ResponseHandling
@@ -26,18 +27,18 @@ class SearchViewModel @Inject constructor(
         viewModelScope.launch {
             _searchData.postValue(ResponseHandling.Loading)
 
-//            val result = repository.setSearch(query)
-//            if (result.isSuccessful) {
-//                _searchData.postValue(
-//                    ResponseHandling.Success(
-//                        result.body() ?: arrayListOf<SearchItemModel>()
-//                    )
-//                )
-//            } else {
-//                _searchData.postValue(ResponseHandling.Error(result.message()))
-//            }
+            val result = repository.setSearch(query)
+            if (result.isSuccessful) {
+                _searchData.postValue(
+                    ResponseHandling.Success(
+                        result.body() ?: SearchModel()
+                    )
+                )
+            } else {
+                _searchData.postValue(ResponseHandling.Error(result.message()))
+            }
 
-            repository.setSearch(query).enqueue(object : Callback<ArrayList<SearchItemModel>> {
+            /*repository.setSearch(query).enqueue(object : Callback<ArrayList<SearchItemModel>> {
                 override fun onResponse(
                     call: Call<ArrayList<SearchItemModel>>,
                     response: Response<ArrayList<SearchItemModel>>
@@ -57,7 +58,7 @@ class SearchViewModel @Inject constructor(
                     _searchData.postValue(ResponseHandling.Error("Network error: ${t.message}"))
                 }
 
-            })
+            })*/
         }
     }
 }

@@ -27,10 +27,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "API_KEY", "\"Authorization: token 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\"")
+            buildConfigField("String", "API_KEY", "\"token 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\"")
         }
         debug {
-            buildConfigField("String", "API_KEY", "\"Authorization: token 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\"")
+            buildConfigField("String", "API_KEY", "\"token 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\"")
         }
     }
     compileOptions {

@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tc.github_user_list.R
-import com.tc.github_user_list.data.model.search.SearchItemModel
+import com.tc.github_user_list.data.model.search.SearchModel
 import com.tc.github_user_list.databinding.FragmentSearchBinding
 import com.tc.github_user_list.util.ResponseHandling
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,7 +43,8 @@ class SearchFragment : Fragment() {
                 is ResponseHandling.Success<*> -> {
                     binding.recyclerSearchView.apply {
                         layoutManager = LinearLayoutManager(context)
-                        adapter = SearchAdapter(it.result as ArrayList<SearchItemModel>) {
+                        val result = it.result as SearchModel
+                        adapter = SearchAdapter(result.items) {
                             findNavController().navigate(R.id.action_navigation_search_to_navigation_profile,
                                 bundleOf(
                                     "profileName" to it.login,
@@ -81,7 +82,14 @@ class SearchFragment : Fragment() {
         })
 
         searchAdapter = SearchAdapter(arrayListOf()) {
-            R.id.action_navigation_search_to_navigation_profile
+            findNavController().navigate(R.id.action_navigation_search_to_navigation_profile,
+                bundleOf(
+                    "profileName" to it.login,
+                    "profileImage" to it.avatarUrl,
+                    "profileFollowers" to it.followersUrl,
+                    "profileFollowing" to it.followingUrl
+                )
+            )
         }
 
         return root
