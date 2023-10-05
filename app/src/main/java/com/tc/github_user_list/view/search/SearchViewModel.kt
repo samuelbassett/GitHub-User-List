@@ -37,28 +37,6 @@ class SearchViewModel @Inject constructor(
             } else {
                 _searchData.postValue(ResponseHandling.Error(result.message()))
             }
-
-            /*repository.setSearch(query).enqueue(object : Callback<ArrayList<SearchItemModel>> {
-                override fun onResponse(
-                    call: Call<ArrayList<SearchItemModel>>,
-                    response: Response<ArrayList<SearchItemModel>>
-                ) {
-                    if (response.isSuccessful) _searchData.postValue(
-                        ResponseHandling.Success(
-                            response.body()
-                        )
-                    )
-                    else _searchData.postValue(ResponseHandling.Error("Error: Service call failed"))
-                }
-
-                override fun onFailure(
-                    call: Call<ArrayList<SearchItemModel>>,
-                    t: Throwable
-                ) {
-                    _searchData.postValue(ResponseHandling.Error("Network error: ${t.message}"))
-                }
-
-            })*/
         }
     }
 }
