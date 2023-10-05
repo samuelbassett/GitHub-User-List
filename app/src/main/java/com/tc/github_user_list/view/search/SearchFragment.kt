@@ -47,10 +47,7 @@ class SearchFragment : Fragment() {
                         adapter = SearchAdapter(result.items) {
                             findNavController().navigate(R.id.action_navigation_search_to_navigation_profile,
                                 bundleOf(
-                                    "profileName" to it.login,
-                                    "profileImage" to it.avatarUrl,
-                                    "profileFollowers" to it.followersUrl,
-                                    "profileFollowing" to it.followingUrl
+                                    "profileName" to it.login
                                 )
                             )
                         }

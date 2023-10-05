@@ -48,10 +48,7 @@ class UsersFragment : Fragment() {
                             findNavController().navigate(
                                 R.id.action_navigation_users_to_navigation_profile,
                                 bundleOf(
-                                    "profileName" to it.login,
-                                    "profileImage" to it.avatarUrl,
-                                    "profileFollowers" to it.followersUrl,
-                                    "profileFollowing" to it.followingUrl
+                                    "profileName" to it.login
                                 )
                             )
                         }

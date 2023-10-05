@@ -10,7 +10,6 @@ object ApiDetails {
     const val baseURL = "https://api.github.com/"
     const val USERS_ENDPOINT = "users"
     const val SEARCH_ENDPOINT = "search/users"
-    const val FOLLOWERS_ENDPOINT = "users/{username}/followers"
-    const val FOLLOWING_ENDPOINT = "users/{username}/following"
+    const val USER_ENDPOINT = "users/{username}"
     const val API_KEY = BuildConfig.API_KEY
 }
