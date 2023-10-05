@@ -14,15 +14,28 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="16dp"
         android:text="Username"
+        android:visibility="gone"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="24sp"
         />
 
+    <ProgressBar
+        android:id="@+id/ProgressBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
     <LinearLayout
+        android:id="@+id/LinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
+        android:visibility="gone"
         android:gravity="center"
         android:layout_marginBottom="300dp"
         android:orientation="vertical">

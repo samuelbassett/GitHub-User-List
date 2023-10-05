@@ -53,15 +53,19 @@ class SearchFragment : Fragment() {
                         }
                     }
                     binding.progressBar.visibility = View.GONE
+                    binding.recyclerSearchView.visibility = View.VISIBLE
                 }
 
                 is ResponseHandling.Error -> {
                     Toast.makeText(context, it.error, Toast.LENGTH_SHORT).show()
                     binding.progressBar.visibility = View.GONE
+                    binding.recyclerSearchView.visibility = View.GONE
+
                 }
 
                 else -> {
                     binding.progressBar.visibility = View.VISIBLE
+                    binding.recyclerSearchView.visibility = View.GONE
                 }
             }
         }

@@ -54,16 +54,19 @@ class UsersFragment : Fragment() {
                         }
                     }
                     binding.progressBar.visibility = View.GONE
+                    binding.recyclerUsersView.visibility = View.VISIBLE
                 }
 
                 is ResponseHandling.Error -> {
                     Toast.makeText(context, it.error, Toast.LENGTH_SHORT).show()
                     binding.progressBar.visibility = View.GONE
+                    binding.recyclerUsersView.visibility = View.GONE
                 }
 
                 else -> {
                     // Loading
                     binding.progressBar.visibility = View.VISIBLE
+                    binding.recyclerUsersView.visibility = View.GONE
                 }
             }
         }

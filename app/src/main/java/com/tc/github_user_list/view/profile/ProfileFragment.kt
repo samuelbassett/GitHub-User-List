@@ -46,12 +46,15 @@ class ProfileFragment: Fragment() {
         profileViewModel.followerData.observe(viewLifecycleOwner) { response ->
             when(response) {
                 is ResponseHandling.Success<*> -> {
+
                     val data = response.result
                     if (data is UserDetailModel) {
                         val followers = data.followers?.let { Util.abbreviateNumber(it) }
                         val following = data.following?.let { Util.abbreviateNumber(it) }
 
-
+                        binding.ProgressBar.visibility = View.GONE
+                        binding.LinearLayout.visibility = View.VISIBLE
+                        binding.profileUsername.visibility = View.VISIBLE
                         binding.profileFollowers.text = followers
                         binding.profileFollowing.text = following
                         binding.profileUsername.text = data.login?: ""
@@ -70,8 +73,16 @@ class ProfileFragment: Fragment() {
                 }
                 is ResponseHandling.Error -> {
                     Toast.makeText(context, response.error, Toast.LENGTH_SHORT).show()
+                    binding.ProgressBar.visibility = View.GONE
+                    binding.profileUsername.visibility = View.GONE
+                    binding.LinearLayout.visibility = View.GONE
                 }
-                else -> ResponseHandling.Loading
+                else -> {
+                    ResponseHandling.Loading
+                    binding.ProgressBar.visibility = View.VISIBLE
+                    binding.LinearLayout.visibility = View.GONE
+                    binding.profileUsername.visibility = View.GONE
+                }
             }
 
         }

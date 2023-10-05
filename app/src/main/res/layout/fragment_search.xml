@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.search.SearchFragment"
-    android:background="@drawable/vertical_gradient_invert">
+    android:background="@drawable/vertical_gradient">
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
@@ -22,6 +22,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerSearchView"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:background="@drawable/vertical_gradient"
         android:layout_height="0dp"
         android:padding="0dp"
