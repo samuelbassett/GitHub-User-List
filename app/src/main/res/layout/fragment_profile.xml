@@ -6,20 +6,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/vertical_gradient_invert">
 
-    <TextView
-        android:id="@+id/profileUsername"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"
-        android:text="Username"
-        android:visibility="gone"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="24sp"
-        />
-
     <ProgressBar
         android:id="@+id/ProgressBar"
         android:layout_width="0dp"
@@ -35,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:visibility="gone"
+        android:visibility="visible"
         android:gravity="center"
         android:layout_marginBottom="300dp"
         android:orientation="vertical">
@@ -56,6 +42,19 @@
             android:text="Username"
             android:textColor="@color/white"
             android:textSize="18sp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/profileLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="Location"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="14sp"
             tools:ignore="HardcodedText" />
 
         <TextView

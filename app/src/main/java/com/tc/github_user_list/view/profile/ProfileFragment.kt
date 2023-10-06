@@ -28,6 +28,7 @@ class ProfileFragment: Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private lateinit var username: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,7 +42,7 @@ class ProfileFragment: Fragment() {
         val profileViewModel =
             ViewModelProvider(this).get(ProfileViewModel::class.java)
 
-        val username = arguments?.getString("profileName")?: ""
+        username = arguments?.getString("profileName")?: ""
 
         profileViewModel.followerData.observe(viewLifecycleOwner) { response ->
             when(response) {
@@ -54,13 +55,12 @@ class ProfileFragment: Fragment() {
 
                         binding.ProgressBar.visibility = View.GONE
                         binding.LinearLayout.visibility = View.VISIBLE
-                        binding.profileUsername.visibility = View.VISIBLE
                         binding.profileFollowers.text = followers
                         binding.profileFollowing.text = following
-                        binding.profileUsername.text = data.login?: ""
                         binding.profileName.text = data.name?: ""
                         binding.profileBio.text = data.bio?: ""
                         binding.profileRepositories.text = data.publicRepos.toString()
+                        setToolBar(data.name?: "")
 
                         Glide.with(this)
                             .load(data.avatarUrl)
@@ -74,14 +74,12 @@ class ProfileFragment: Fragment() {
                 is ResponseHandling.Error -> {
                     Toast.makeText(context, response.error, Toast.LENGTH_SHORT).show()
                     binding.ProgressBar.visibility = View.GONE
-                    binding.profileUsername.visibility = View.GONE
                     binding.LinearLayout.visibility = View.GONE
                 }
                 else -> {
                     ResponseHandling.Loading
                     binding.ProgressBar.visibility = View.VISIBLE
                     binding.LinearLayout.visibility = View.GONE
-                    binding.profileUsername.visibility = View.GONE
                 }
             }
 
@@ -89,8 +87,16 @@ class ProfileFragment: Fragment() {
 
         profileViewModel.getUserDetails(username)
 
-
         return root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setToolBar()
+    }
+
+    private fun setToolBar(name: String = username) {
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = username
     }
 
     override fun onDestroyView() {
