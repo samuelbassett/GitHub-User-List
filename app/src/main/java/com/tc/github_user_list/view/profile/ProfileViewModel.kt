@@ -22,14 +22,14 @@ class ProfileViewModel @Inject constructor(
         viewModelScope.launch {
             _followerData.postValue(ResponseHandling.Loading)
             val result = repository.getUserDetails(username)
-            if (result.isSuccessful) {
+            if (result != null) {
                 _followerData.postValue(
                     ResponseHandling.Success(
-                        result.body() ?: UserDetailModel()
+                        result ?: UserDetailModel()
                     )
                 )
             } else {
-                _followerData.postValue(ResponseHandling.Error(result.message()))
+                _followerData.postValue(ResponseHandling.Error())
             }
         }
     }

@@ -22,14 +22,14 @@ class UsersViewModel @Inject constructor(
         viewModelScope.launch {
             _userData.postValue(ResponseHandling.Loading)
             val result = repository.getUsers()
-            if (result.isSuccessful) {
+            if (result.size > 0) {
                 _userData.postValue(
                     ResponseHandling.Success(
-                        result.body() ?: arrayListOf<UserItemModel>()
+                        result ?: arrayListOf<UserItemModel>()
                     )
                 )
             } else {
-                _userData.postValue(ResponseHandling.Error(result.message()))
+                _userData.postValue(ResponseHandling.Error())
             }
         }
     }

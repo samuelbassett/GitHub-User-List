@@ -14,15 +14,15 @@ import retrofit2.http.Query
 
 interface ApiEndpoint {
     @GET(ApiDetails.USERS_ENDPOINT)
-    suspend fun getUsers(): Response<ArrayList<UserItemModel>>
+    suspend fun getUsers(): ArrayList<UserItemModel>
 
     @GET(ApiDetails.SEARCH_ENDPOINT)
     suspend fun setSearch(
         @Query("q") query: String
-    ): Response<SearchModel>
+    ): SearchModel
 
     @GET(ApiDetails.USER_ENDPOINT)
     suspend fun getUserDetails(@Path("username") username: String
-    ): Response<UserDetailModel>
+    ): UserDetailModel
 
 }

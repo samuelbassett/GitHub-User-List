@@ -28,14 +28,14 @@ class SearchViewModel @Inject constructor(
             _searchData.postValue(ResponseHandling.Loading)
 
             val result = repository.setSearch(query)
-            if (result.isSuccessful) {
+            if (result != null) {
                 _searchData.postValue(
                     ResponseHandling.Success(
-                        result.body() ?: SearchModel()
+                        result ?: SearchModel()
                     )
                 )
             } else {
-                _searchData.postValue(ResponseHandling.Error(result.message()))
+                _searchData.postValue(ResponseHandling.Error())
             }
         }
     }

@@ -11,15 +11,15 @@ class RepositoryImpl @Inject constructor(
     private val service: ApiEndpoint
 ) : Repository {
 
-    override suspend fun getUsers(): Response<ArrayList<UserItemModel>> {
+    override suspend fun getUsers(): ArrayList<UserItemModel> {
         return service.getUsers()
     }
 
-    override suspend fun setSearch(q: String): Response<SearchModel> {
+    override suspend fun setSearch(q: String): SearchModel {
         return service.setSearch(q)
     }
 
-    override suspend fun getUserDetails(username: String): Response<UserDetailModel> {
+    override suspend fun getUserDetails(username: String): UserDetailModel {
         return service.getUserDetails(username)
     }
 }

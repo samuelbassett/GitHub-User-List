@@ -6,9 +6,9 @@ import com.tc.github_user_list.data.model.user.UserItemModel
 import retrofit2.Response
 
 interface Repository {
-    suspend fun getUsers(): Response<ArrayList<UserItemModel>>
+    suspend fun getUsers(): ArrayList<UserItemModel>
 
-    suspend fun setSearch(q: String): Response<SearchModel>
+    suspend fun setSearch(q: String): SearchModel
 
-    suspend fun getUserDetails(username: String): Response<UserDetailModel>
+    suspend fun getUserDetails(username: String): UserDetailModel
 }
