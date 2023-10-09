@@ -13,6 +13,9 @@ import com.bumptech.glide.request.RequestOptions
 import com.tc.github_user_list.R
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.tc.github_user_list.data.model.user.UserDetailModel
 import com.tc.github_user_list.databinding.FragmentProfileBinding
 import com.tc.github_user_list.util.ResponseHandling
@@ -43,6 +46,20 @@ class ProfileFragment: Fragment() {
             ViewModelProvider(this).get(ProfileViewModel::class.java)
 
         username = arguments?.getString("profileName")?: ""
+
+        val tabLayout = binding.tabLayout
+        val viewPager = binding.viewPager
+        val adapter = ProfilePagerAdapter(childFragmentManager, lifecycle, username)
+        viewPager.adapter = adapter
+
+        val tabLayoutMediator = TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            when (position) {
+                0 -> tab.text = "Followers"
+                1 -> tab.text = "Following"
+            }
+        }
+        tabLayoutMediator.attach()
+
 
         profileViewModel.followerData.observe(viewLifecycleOwner) { response ->
             when(response) {

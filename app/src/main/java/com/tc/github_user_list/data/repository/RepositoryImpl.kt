@@ -1,6 +1,8 @@
 package com.tc.github_user_list.data.repository
 
 import com.tc.github_user_list.data.model.search.SearchModel
+import com.tc.github_user_list.data.model.user.FollowersItemModel
+import com.tc.github_user_list.data.model.user.FollowingItemModel
 import com.tc.github_user_list.data.model.user.UserDetailModel
 import com.tc.github_user_list.data.model.user.UserItemModel
 import com.tc.github_user_list.data.remote.ApiEndpoint
@@ -21,5 +23,13 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun getUserDetails(username: String): UserDetailModel {
         return service.getUserDetails(username)
+    }
+
+    override suspend fun getFollowers(username: String): ArrayList<FollowersItemModel> {
+        return service.getFollowers(username)
+    }
+
+    override suspend fun getFollowing(username: String): ArrayList<FollowingItemModel> {
+        return service.getFollowing(username)
     }
 }

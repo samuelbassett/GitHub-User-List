@@ -11,5 +11,7 @@ object ApiDetails {
     const val USERS_ENDPOINT = "users"
     const val SEARCH_ENDPOINT = "search/users"
     const val USER_ENDPOINT = "users/{username}"
+    const val FOLLOWER_ENDPOINT = "users/{username}/followers"
+    const val FOLLOWING_ENDPOINT = "users/{username}/following"
     const val API_KEY = BuildConfig.API_KEY
 }
